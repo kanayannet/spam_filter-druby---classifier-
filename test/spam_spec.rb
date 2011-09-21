@@ -1,4 +1,4 @@
-#!/bin/env /usr/local/bin/ruby-1.9.2-p290
+#!/usr/local/bin/ruby
 # -*- coding: UTF-8 -*-
 
 require 'drb/drb'
