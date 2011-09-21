@@ -1,0 +1,9 @@
+
+#sample code
+
+#まずはデーモンプロセスを起動
+
+./spam_daemon.rb &
+
+#呼び出し方は テストコード : spam_spec.rb を参考にしてください。
+
