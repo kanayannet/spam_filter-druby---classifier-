@@ -18,20 +18,25 @@ class Spam
 	end
 	def json2bayes()
 		begin
-			open(@spam_file_path,'r') do |io|
-				json = io.read.to_s.force_encoding("UTF-8")
-				json_spam = JSON.parse(json)
-				set_spam()
-				json_spam.each do |rec|
-					study(rec.to_s)
+			if(File.exists?(@spam_file_path) == true)
+
+				open(@spam_file_path,'r') do |io|
+					json = io.read.to_s.force_encoding("UTF-8")
+					json_spam = JSON.parse(json)
+					set_spam()
+					json_spam.each do |rec|
+						study(rec.to_s)
+					end
 				end
 			end
-			open(@real_file_path,'r') do |io|
-				json = io.read.to_s.force_encoding("UTF-8")
-				json_real = JSON.parse(json)
-				set_real()
-				json_real.each do |rec|
-					study(rec.to_s)
+			if(File.exists?(@real_file_path) == true)
+				open(@real_file_path,'r') do |io|
+					json = io.read.to_s.force_encoding("UTF-8")
+					json_real = JSON.parse(json)
+					set_real()
+					json_real.each do |rec|
+						study(rec.to_s)
+					end
 				end
 			end
 			return true
