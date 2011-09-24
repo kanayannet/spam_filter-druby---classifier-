@@ -64,10 +64,12 @@ class Spam
 	end
 	def to_json_file()
 		begin
+			json_mkdir(@spam_file_path)
 			io = File.open(@spam_file_path,'w')
 			io.puts JSON.pretty_generate(@spams)
 			io.close
 		
+			json_mkdir(@real_file_path)
 			io = File.open(@real_file_path,'w')
 			io.puts JSON.pretty_generate(@reals)
 			io.close
@@ -81,6 +83,13 @@ class Spam
 	end
 	
 	private
+	def json_mkdir(file_path)
+		dir = file_path
+		dir = dir.sub(/\/[a-zA-Z0-9\-_]+\.json$/,"")
+		if File.exists?(dir) == false
+			Dir.mkdir(dir)
+		end
+	end
 	def to_spam(str = "")
 		@spams.push(str) 
 		return
