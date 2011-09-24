@@ -11,8 +11,8 @@ class Spam
 		@wakati = MeCab::Tagger.new('-O wakati')
 		@real_file_path = "/var/spam_filter/real.json"
 		@spam_file_path = "/var/spam_filter/spam.json"
-		@spams = []
-		@reals = []
+		@spams = {}
+		@reals = {}
 		ret = json2bayes()
 		abort("Can't read json") if(ret == false)
 	end
@@ -24,8 +24,8 @@ class Spam
 					json = io.read.to_s.force_encoding("UTF-8")
 					json_spam = JSON.parse(json)
 					set_spam()
-					json_spam.each do |rec|
-						study(rec.to_s)
+					json_spam.each do |key,val|
+						study(key.to_s)
 					end
 				end
 			end
@@ -34,8 +34,8 @@ class Spam
 					json = io.read.to_s.force_encoding("UTF-8")
 					json_real = JSON.parse(json)
 					set_real()
-					json_real.each do |rec|
-						study(rec.to_s)
+					json_real.each do |key,val|
+						study(key.to_s)
 					end
 				end
 			end
@@ -91,11 +91,11 @@ class Spam
 		end
 	end
 	def to_spam(str = "")
-		@spams.push(str) 
+		@spams[str] = 1 
 		return
 	end
 	def to_real(str = "")
-		@reals.push(str) 
+		@reals[str] = 1
 		return
 	end
 end
