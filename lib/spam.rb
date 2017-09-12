@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-require 'MeCab'
+require 'mecab'
 require 'classifier'
 require 'json/pure'
 

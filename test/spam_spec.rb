@@ -16,12 +16,13 @@ describe "drb + spam_filter" do
 	end
 	it "非spam の文章を学習" do
 		@obj.set_real.study("こんばんわ")
+		@obj.set_real.study("こんにちわ")
 		@obj.set_real.study("ちわっす")
 	end
 	it "spam か real か判断(Real になるべき)" do
-		@obj.judgment("おはよう").to_s.should == 'Real'
+		expect(@obj.judgment("おはよう").to_s) == 'Real'
 	end
 	it "json に保存できたか?" do
-		@obj.to_json_file().should == true
+		expect(@obj.to_json_file() ) == true
 	end
 end
